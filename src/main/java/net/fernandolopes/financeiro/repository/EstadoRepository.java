@@ -3,9 +3,9 @@ package net.fernandolopes.financeiro.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import net.fernandolopes.financeiro.domain.Endereco;
+import net.fernandolopes.financeiro.domain.Estado;
 
 @Repository
-public interface EstadoRepository extends JpaRepository<Endereco, Integer> {
+public interface EstadoRepository extends JpaRepository<Estado, Integer> {
 
 }
