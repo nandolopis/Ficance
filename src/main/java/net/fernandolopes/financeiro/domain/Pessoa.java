@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import net.fernandolopes.financeiro.domain.enums.PessoaTipo;
 
@@ -32,12 +33,11 @@ public class Pessoa implements Serializable {
 	private String email;
 	private Integer tipo;
 	
-	@JsonIgnore
+	@JsonManagedReference
 	@OneToOne
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy="pessoa")
 	private List<Endereco> enderecos = new ArrayList<>();
 	
@@ -45,7 +45,6 @@ public class Pessoa implements Serializable {
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 	
-	@JsonIgnore
 	@OneToMany(mappedBy="pessoa")
 	private List<Conta> conta = new ArrayList<>();
 	

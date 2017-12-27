@@ -22,7 +22,7 @@ import net.fernandolopes.financeiro.repository.PessoaRepository;
 import net.fernandolopes.financeiro.repository.UsuarioRepository;
 
 @SpringBootApplication
-public class FinanceiroApplication implements CommandLineRunner {
+public class FinanceiroApplication implements CommandLineRunner{
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
@@ -67,6 +67,8 @@ public class FinanceiroApplication implements CommandLineRunner {
 		cidadeRepository.save(Arrays.asList(c1));
 		pessoaRepository.save(Arrays.asList(p1));
 		enderecoRepository.save(Arrays.asList(e1));
+		
+		
 		
 		
 	

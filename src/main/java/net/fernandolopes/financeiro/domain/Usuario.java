@@ -6,7 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-//import javax.persistence.OneToOne;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Usuario implements Serializable {
@@ -18,18 +20,19 @@ public class Usuario implements Serializable {
 	private String login;
 	private String senha;
 	
-	//@OneToOne
-	//private Pessoa pessoa;
+	@JsonBackReference
+	@OneToOne
+	private Pessoa pessoa;
 	
 	public Usuario() {
 	}
 
-	public Usuario(Integer id, String login, String senha /*, Pessoa pessoa*/) {
+	public Usuario(Integer id, String login, String senha , Pessoa pessoa) {
 		super();
 		this.id = id;
 		this.login = login;
 		this.senha = senha;
-		//this.pessoa = pessoa;
+		this.pessoa = pessoa;
 		
 	}
 
@@ -57,13 +60,13 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 	
-//	public Pessoa getPessoa() {
-//		return pessoa;
-//	}
-//
-//	public void setPessoa(Pessoa pessoa) {
-//		this.pessoa = pessoa;
-//	}
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
 
 	@Override
 	public int hashCode() {
