@@ -17,7 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import net.fernandolopes.financeiro.domain.Endereco;
+
+import net.fernandolopes.financeiro.domain.enums.PessoaTipo;
 
 @Entity
 public class Pessoa implements Serializable {
@@ -29,6 +30,7 @@ public class Pessoa implements Serializable {
 	private String nome;
 	private String cpt_cnpj;
 	private String email;
+	private Integer tipo;
 	
 	@JsonIgnore
 	@OneToOne
@@ -52,13 +54,14 @@ public class Pessoa implements Serializable {
 	}
 
 
-	public Pessoa(Integer id, String nome, String cpt_cnpj, String email, Usuario usuario) {
+	public Pessoa(Integer id, String nome, String cpt_cnpj, String email, Usuario usuario, PessoaTipo tipo) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.cpt_cnpj = cpt_cnpj;
 		this.email = email;
 		this.usuario = usuario;
+		this.tipo = tipo.getCod();
 	}
 
 
@@ -139,6 +142,16 @@ public class Pessoa implements Serializable {
 
 	public void setConta(List<Conta> conta) {
 		this.conta = conta;
+	}
+
+
+	public PessoaTipo getTipo() {
+		return PessoaTipo.toEnum(tipo);
+	}
+
+
+	public void setTipo(PessoaTipo tipo) {
+		this.tipo = tipo.getCod();
 	}
 
 
