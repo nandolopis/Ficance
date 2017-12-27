@@ -1,68 +1,69 @@
 package net.fernandolopes.financeiro.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import net.fernandolopes.financeiro.domain.Cidade;
 
 @Entity
-public class Usuario implements Serializable {
+public class Estado implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String login;
-	private String senha;
+	private String nome;
 	
-	@OneToOne
-	private Pessoa pessoa;
+	@JsonIgnore
+	@OneToMany(mappedBy="estado")
+	private List<Cidade> cidades = new ArrayList<>();
 	
-	public Usuario() {
-	}
-
-	public Usuario(Integer id, String login, String senha, Pessoa pessoa) {
-		super();
-		this.id = id;
-		this.login = login;
-		this.senha = senha;
-		this.pessoa = pessoa;
+	public Estado() {
 		
 	}
+
+
+	public Estado(Integer id, String nome) {
+		super();
+		this.id = id;
+		this.nome = nome;
+	}
+
 
 	public Integer getId() {
 		return id;
 	}
 
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public String getLogin() {
-		return login;
+
+	public String getNome() {
+		return nome;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
 	
-	public Pessoa getPessoa() {
-		return pessoa;
+	public List<Cidade> getCidades() {
+		return cidades;
 	}
 
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
+	public void setCidades(List<Cidade> cidades) {
+		this.cidades = cidades;
 	}
 
 	@Override
@@ -73,6 +74,7 @@ public class Usuario implements Serializable {
 		return result;
 	}
 
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -81,7 +83,7 @@ public class Usuario implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Usuario other = (Usuario) obj;
+		Estado other = (Estado) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -89,7 +91,6 @@ public class Usuario implements Serializable {
 			return false;
 		return true;
 	}
-	
 	
 	
 

@@ -6,31 +6,33 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import net.fernandolopes.financeiro.domain.Cidade;
+import net.fernandolopes.financeiro.domain.Estado;
 
 @Entity
-public class Usuario implements Serializable {
+public class Cidade implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String login;
-	private String senha;
+	private String nome;
 	
-	@OneToOne
-	private Pessoa pessoa;
+	@ManyToOne
+	@JoinColumn(name="estado_id")
+	private Estado estado;
 	
-	public Usuario() {
+	public Cidade() {
 	}
 
-	public Usuario(Integer id, String login, String senha, Pessoa pessoa) {
+	public Cidade(Integer id, String nome, Estado estado) {
 		super();
 		this.id = id;
-		this.login = login;
-		this.senha = senha;
-		this.pessoa = pessoa;
-		
+		this.nome = nome;
+		this.estado = estado;
 	}
 
 	public Integer getId() {
@@ -41,28 +43,20 @@ public class Usuario implements Serializable {
 		this.id = id;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public String getSenha() {
-		return senha;
+	public Estado getEstado() {
+		return estado;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-	
-	public Pessoa getPessoa() {
-		return pessoa;
-	}
-
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
 	@Override
@@ -81,7 +75,7 @@ public class Usuario implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Usuario other = (Usuario) obj;
+		Cidade other = (Cidade) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -89,8 +83,5 @@ public class Usuario implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
 
 }
