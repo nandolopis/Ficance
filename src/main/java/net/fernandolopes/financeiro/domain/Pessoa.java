@@ -35,7 +35,7 @@ public class Pessoa implements Serializable {
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy="pessoa")
 	private List<Endereco> enderecos = new ArrayList<>();
 	
@@ -43,9 +43,12 @@ public class Pessoa implements Serializable {
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 	
+	@JsonIgnore
+	@OneToMany(mappedBy="pessoa")
+	private List<Conta> conta = new ArrayList<>();
+	
 	
 	public Pessoa() {
-		
 	}
 
 
@@ -106,6 +109,36 @@ public class Pessoa implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+	
+	
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
+
+
+	public Set<String> getTelefones() {
+		return telefones;
+	}
+
+
+	public void setTelefones(Set<String> telefones) {
+		this.telefones = telefones;
+	}
+
+
+	public List<Conta> getConta() {
+		return conta;
+	}
+
+
+	public void setConta(List<Conta> conta) {
+		this.conta = conta;
 	}
 
 
